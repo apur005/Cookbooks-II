@@ -1,0 +1,13 @@
+source "https://supermarket.chef.io"
+source "https://github.com/aws/opsworks-cookbooks.git"
+
+metadata
+
+cookbook 'build-essential', '>= 1.4.2', git: 'git://github.com/opscode-cookbooks/build-essential.git', tag: 'v1.4.2'
+cookbook 'python', '>= 1.4.6'
+cookbook 'mongodb', '>= 0.16.2'
+cookbook 'nodejs', '>= 2.4.4'
+cookbook 'npm', '>= 0.1.2'
+
+
+
