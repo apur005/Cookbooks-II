@@ -10,6 +10,10 @@ apt_update 'all platforms' do
 action :update
 end
 
+apt_package 'mongodb-server' do
+action :install
+end
+
 execute 'express' do
 command 'sudo npm install express --save'
 end
