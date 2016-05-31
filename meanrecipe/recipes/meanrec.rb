@@ -9,7 +9,7 @@
 
 
 execute 'mongo db' do
-command 'sudo apt-get install mongodb-server'
+command 'sudo apt-get -y install mongodb-server'
 end
 
 execute 'express' do
