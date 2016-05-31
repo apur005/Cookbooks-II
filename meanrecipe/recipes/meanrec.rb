@@ -6,12 +6,10 @@
 #
 # All rights reserved - Do Not Redistribute
 
-apt_update 'all platforms' do
-action :update
-end
 
-apt_package 'mongodb-server' do
-action :install
+
+execute 'mongo db' do
+command 'sudo apt-get install mongodb-server'
 end
 
 execute 'express' do
