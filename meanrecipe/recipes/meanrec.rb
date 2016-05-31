@@ -6,7 +6,9 @@
 #
 # All rights reserved - Do Not Redistribute
 
-
+execute 'update' do
+command 'sudo apt-get update'
+end
 
 execute 'mongo db' do
 command 'sudo apt-get -y install mongodb-server'
@@ -27,6 +29,10 @@ end
 
 execute 'python' do
 command 'sudo apt-get -y install python'
+end
+
+execute 'python-pip' do
+command 'sudo apt-get -y install python-pip'
 end
 
 execute 'flask' do
