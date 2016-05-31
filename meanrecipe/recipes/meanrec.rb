@@ -12,9 +12,9 @@ execute 'mongo db' do
 command 'sudo apt-get -y install mongodb-server'
 end
 
-execute 'nodejs' do
-command 'sudo apt-get -y install nodejs'
-end
+#execute 'nodejs' do
+#command 'sudo apt-get -y install nodejs'
+#end
 
 
 execute 'express' do
