@@ -3,11 +3,11 @@ source "https://supermarket.chef.io"
 metadata
 
 cookbook 'build-essential', '>= 1.4.2', git: 'git://github.com/opscode-cookbooks/build-essential.git', tag: 'v1.4.2'
-cookbook 'python', '>= 1.4.6'
-cookbook 'npm', '>= 0.1.2'
-cookbook 'nodejs', '>= 2.4.4'
+#cookbook 'python', '>= 1.4.6'
+#cookbook 'npm', '>= 0.1.2'
+#cookbook 'nodejs', '>= 2.4.4'
 
-cookbook 'mongodb', git: 'git://github.com/edelight/chef-mongodb.git'
+#cookbook 'mongodb', git: 'git://github.com/edelight/chef-mongodb.git'
 
 
 
