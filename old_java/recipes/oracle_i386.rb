@@ -1,9 +1,9 @@
 #
 # Author:: Bryan W. Berry (<bryan.berry@gmail.com>)
 # Cookbook Name:: java
-# Recipe:: oracle
+# Recipe:: oracle_i386
 #
-# Copyright 2011, Bryan w. Berry
+# Copyright 2010-2015, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,48 +29,43 @@ unless node.recipe?('java::default')
 end
 
 java_home = node['java']['java_home']
-arch = node['java']['arch']
 
 case node['java']['jdk_version'].to_s
 when '6'
-  tarball_url = node['java']['jdk']['6'][arch]['url']
-  tarball_checksum = node['java']['jdk']['6'][arch]['checksum']
+  tarball_url = node['java']['jdk']['6']['i586']['url']
+  tarball_checksum = node['java']['jdk']['6']['i586']['checksum']
   bin_cmds = node['java']['jdk']['6']['bin_cmds']
 when '7'
-  tarball_url = node['java']['jdk']['7'][arch]['url']
-  tarball_checksum = node['java']['jdk']['7'][arch]['checksum']
+  tarball_url = node['java']['jdk']['7']['i586']['url']
+  tarball_checksum = node['java']['jdk']['7']['i586']['checksum']
   bin_cmds = node['java']['jdk']['7']['bin_cmds']
 when '8'
-  tarball_url = node['java']['jdk']['8'][arch]['url']
-  tarball_checksum = node['java']['jdk']['8'][arch]['checksum']
+  tarball_url = node['java']['jdk']['8']['i586']['url']
+  tarball_checksum = node['java']['jdk']['8']['i586']['checksum']
   bin_cmds = node['java']['jdk']['8']['bin_cmds']
-end
-
-if tarball_url =~ /example.com/
-  Chef::Application.fatal!('You must change the download link to your private repository. You can no longer download java directly from http://download.oracle.com without a web broswer')
 end
 
 include_recipe 'java::set_java_home'
 
-package 'tar' do
-  not_if { platform_family?('mac_os_x') }
+yum_package 'glibc' do
+  arch 'i686'
+  only_if { platform_family?('rhel', 'fedora') }
 end
 
-java_ark 'jdk' do
+package 'tar'
+
+java_ark 'jdk-alt' do
   url tarball_url
   default node['java']['set_default']
   checksum tarball_checksum
   app_home java_home
   bin_cmds bin_cmds
-  alternatives_priority node['java']['alternatives_priority']
   retries node['java']['ark_retries']
-  retry_delay node['java']['ark_retry_delay']
-  connect_timeout node['java']['ark_timeout']
+  retry_delay node['java']['ark_retries']
   use_alt_suffix node['java']['use_alt_suffix']
   reset_alternatives node['java']['reset_alternatives']
-  download_timeout node['java']['ark_download_timeout']
-  proxy node['java']['ark_proxy']
   action :install
+  default false
   notifies :write, 'log[jdk-version-changed]', :immediately
 end
 

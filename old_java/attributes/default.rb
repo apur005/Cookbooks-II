@@ -22,7 +22,7 @@ default['java']['jdk_version'] = '8'
 default['java']['arch'] = node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i586'
 default['java']['openjdk_packages'] = []
 default['java']['openjdk_version'] = nil
-default['java']['accept_license_agreement'] = false
+default['java']['accept_license_agreement'] = true
 default['java']['set_default'] = true
 default['java']['alternatives_priority'] = 1062
 default['java']['set_etc_environment'] = false
@@ -46,7 +46,7 @@ when 'windows'
 when 'mac_os_x'
   default['java']['install_flavor'] = 'homebrew'
 else
-  default['java']['install_flavor'] = 'oracle'
+  default['java']['install_flavor'] = 'openjdk'
 end
 
 case node['java']['install_flavor']
@@ -54,7 +54,7 @@ when 'ibm', 'ibm_tar'
   default['java']['ibm']['url'] = nil
   default['java']['ibm']['checksum'] = nil
   default['java']['ibm']['accept_ibm_download_terms'] = false
-  default['java']['java_home'] = '/opt/ibm/java'
+  default['java']['java_home'] = '/opt/java'
 
   default['java']['ibm']['6']['bin_cmds'] = %w(appletviewer apt ControlPanel extcheck HtmlConverter idlj jar jarsigner
                                                java javac javadoc javah javap javaws jconsole jcontrol jdb jdmpview

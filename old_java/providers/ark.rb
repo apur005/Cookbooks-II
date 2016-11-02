@@ -67,7 +67,6 @@ end
 def download_direct_from_oracle(tarball_name, new_resource)
   download_path = "#{Chef::Config[:file_cache_path]}/#{tarball_name}"
   cookie = 'oraclelicense=accept-securebackup-cookie'
-  proxy = "-x #{new_resource.proxy}" unless new_resource.proxy.nil?
   if node['java']['oracle']['accept_oracle_download_terms']
     # install the curl package
     p = package 'curl' do
@@ -79,7 +78,7 @@ def download_direct_from_oracle(tarball_name, new_resource)
     converge_by(description) do
       Chef::Log.debug 'downloading oracle tarball straight from the source'
       cmd = shell_out!(
-        %( curl --create-dirs -L --retry #{new_resource.retries} --retry-delay #{new_resource.retry_delay} --cookie "#{cookie}" #{new_resource.url} -o #{download_path} --connect-timeout #{new_resource.connect_timeout} #{proxy} ),
+        %( curl --create-dirs -L --retry #{new_resource.retries} --retry-delay #{new_resource.retry_delay} --cookie "#{cookie}" #{new_resource.url} -o #{download_path} --connect-timeout #{new_resource.connect_timeout} ),
                                  timeout: new_resource.download_timeout
       )
     end
@@ -175,7 +174,7 @@ action :install do
       end
 
       # change ownership of extracted files
-      FileUtils.chown_R new_resource.owner, app_group, app_dir
+      FileUtils.chown_R new_resource.owner, app_group, app_root
     end
     new_resource.updated_by_last_action(true)
   end
