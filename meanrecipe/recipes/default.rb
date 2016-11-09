@@ -51,7 +51,7 @@ execute 'tomcat' do
 command 'wget http://mirror.sdunix.com/apache/tomcat/tomcat-8/v8.0.23/bin/apache-tomcat-8.0.23.tar.gz'
 end
 
-directory '/opt/tomcat'
+directory '/opt/tomcat' do
 owner 'root'
 group 'root'
 mode '0775'
