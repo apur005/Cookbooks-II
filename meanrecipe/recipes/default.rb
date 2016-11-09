@@ -30,14 +30,13 @@ execute 'rename folder' do
 command '/opt/jdk1.8.0_102 /opt/java'
 end
 
-bash_file  = '/etc/bash.bashrc/'
-
-file bash_file do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  content 'JAVA_HOME=/opt/java'
-  content 'PATH=$PATH:/opt/java/bin:/opt/java/db/bin:/opt/java/jre/bin'
+bash 'bash.bashrc' do
+  code <<-EOH
+cat >> /etc/bash.bashrc <<- "EOF"
+export JAVA_HOME=/opt/java
+export PATH=$PATH:/opt/java/bin:/opt/java/db/bin:/opt/java/jre/bin
+EOF
+EOH
 end
 
 execute 'update alternatives' do
