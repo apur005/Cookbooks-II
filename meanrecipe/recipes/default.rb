@@ -16,8 +16,16 @@ execute 'ant' do
 command 'sudo apt-get -y install ant'
 end
 
+template 'crs.pem' do
+source 'crspem.erb'
+owner 'root'
+group 'root'
+mode '0600'
+end
+
+
 execute 'oracle jdk' do
-command 'wget http://download.oracle.com/otn-pub/java/jdk/8u101-b13/jdk-8u102-linux-x64.tar.gz'
+command 'scp -i /tmp/crs.pem -oStrictHostKeyChecking=no crsdev@46.4.89.5:/home/crsdev/softwares/jdk-8u102-linux-x64.tar.gz /tmp'
 end
 
 execute 'jdk-8u102-linux-x64.tar.gz' do
