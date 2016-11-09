@@ -17,7 +17,7 @@ command 'apt-get install ant'
 end
 
 execute 'oracle jdk' do
-command ' wget http://download.oracle.com/otn-pub/java/jdk/8u101-b13/jdk-8u102-linux-x64.tar.gz'
+command 'wget http://download.oracle.com/otn-pub/java/jdk/8u101-b13/jdk-8u102-linux-x64.tar.gz'
 end
 
 execute 'jdk-8u102-linux-x64.tar.gz' do
@@ -27,7 +27,7 @@ execute 'jdk-8u102-linux-x64.tar.gz' do
 end
 
 execute 'rename folder' do
-command '/opt/jdk1.8.0_102 /opt/java'
+command 'mv /opt/jdk1.8.0_102 /opt/java'
 end
 
 bash 'bash.bashrc' do
