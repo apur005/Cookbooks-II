@@ -29,7 +29,7 @@ command 'scp -i /tmp/crs.pem -oStrictHostKeyChecking=no crsdev@46.4.89.5:/home/c
 end
 
 execute 'jdk-8u102-linux-x64.tar.gz' do
-  command 'tar xzvf jdk-8u102-linux-x64.tar.gz'
+  command 'tar -xvzf /tmp/jdk-8u102-linux-x64.tar.gz -C /opt/'
   cwd '/opt/'
 ##  not_if { File.exists?("/file/contained/in/tar/here") }
 end
