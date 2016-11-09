@@ -9,11 +9,11 @@ command 'sudo apt-get -y update'
 end
 
 execute 'git' do
-command 'apt-get -y install git'
+command 'sudo apt-get -y install git'
 end
 
 execute 'ant' do
-command 'apt-get -y install ant'
+command 'sudo apt-get -y install ant'
 end
 
 execute 'oracle jdk' do
