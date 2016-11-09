@@ -20,6 +20,16 @@ execute 'oracle jdk' do
 command ' wget http://download.oracle.com/otn-pub/java/jdk/8u101-b13/jdk-8u102-linux-x64.tar.gz'
 end
 
+execute 'jdk-8u102-linux-x64.tar.gz' do
+  command 'tar xzvf jdk-8u102-linux-x64.tar.gz'
+  cwd '/opt/'
+##  not_if { File.exists?("/file/contained/in/tar/here") }
+end
+
+execute 'rename folder' do
+command '/opt/jdk1.8.0_102 /opt/java'
+end
+
 bash_file  = '/etc/bash.bashrc/'
 
 file bash_file do
@@ -37,17 +47,6 @@ end
 execute 'default-java' do
 command 'update-alternatives --set java /opt/java/jre/bin/java'
 end
-
-execute 'jdk-8u102-linux-x64.tar.gz' do
-  command 'tar xzvf jdk-8u102-linux-x64.tar.gz'
-  cwd '/opt/'
-##  not_if { File.exists?("/file/contained/in/tar/here") }
-end
-
-execute 'rename folder' do
-command '/opt/jdk1.8.0_102 /opt/java'
-end
-
 
 execute 'tomcat' do
 command 'wget http://mirror.sdunix.com/apache/tomcat/tomcat-8/v8.0.23/bin/apache-tomcat-8.0.23.tar.gz'
