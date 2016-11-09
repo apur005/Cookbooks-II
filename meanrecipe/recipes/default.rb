@@ -8,12 +8,12 @@ execute 'update' do
 command 'sudo apt-get -y update'
 end
 
-apt-package 'git' do
-	action :install
+execute 'git' do
+command 'apt-get install git'
 end
 
-apt-package 'ant' do
-	action :install
+execute 'ant' do
+command 'apt-get install ant'
 end
 
 execute 'oracle jdk' do
